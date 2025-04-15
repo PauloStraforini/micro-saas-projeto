@@ -1,7 +1,9 @@
-"use server"
+"use server";
 
-import { signIn } from "@/app/lib/auth"
+import { signIn } from "@/app/lib/auth";
 
 export async function handleAuth() {
-    await signIn("google")
+  await signIn("google", {
+    redirectTo: "/project/dashboard",
+  });
 }
