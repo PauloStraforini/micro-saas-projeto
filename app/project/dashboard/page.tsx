@@ -1,5 +1,6 @@
 import { handleSingOut } from "@/app/actions/handle-singOut";
 import { auth } from "@/app/lib/auth";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function dashboard() {
@@ -30,6 +31,11 @@ export default async function dashboard() {
             </button>
           </form>
         )}
+        <Link href="/project/pagamentos">
+          <button className="border-black border rounderd md px-3 cursor-pointer:true mt-3">
+            Pagamentos
+          </button>
+        </Link>
       </main>
     </div>
   );

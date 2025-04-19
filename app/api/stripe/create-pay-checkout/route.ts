@@ -23,12 +23,16 @@ export async function POST (req: NextRequest) {
         metadata
     })
 
-    if (!session) {
-        return NextResponse.json({error: "Session not found"}, { status: 500 })
-    }
+    if (!session.url) {
+        return NextResponse.json(
+            {error: "Session not found"},
+            { status: 500 }
+        )
+    }       
 
     return NextResponse.json({sessionId: session.id}, { status: 200 })
 }catch (error) {
     console.error("Error creating Stripe Checkout session:", error)
+    return NextResponse.error()
 }
 }
