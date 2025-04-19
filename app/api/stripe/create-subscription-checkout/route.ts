@@ -3,7 +3,7 @@ import stripe from "@/app/lib/stipre";
 import { auth } from "@/app/lib/auth";
 import { getCreateCustomerId } from "@/app/server/stripe/get-customer-id";
 
-export default async function POST(req: NextRequest) {
+export async function POST(req: NextRequest) {
     const { testeId } = await req.json();
 
     const price = process.env.STRIPE_SUBSCRIPTION_PRICE_ID;
@@ -22,10 +22,9 @@ export default async function POST(req: NextRequest) {
 
     const customerId = await getCreateCustomerId(userId, userEmail);
 
-
     const metadata = {
         testeId: testeId,
-    }
+    };
 
     try {
         const session = await stripe.checkout.sessions.create({
@@ -35,18 +34,17 @@ export default async function POST(req: NextRequest) {
             cancel_url: `${req.headers.get("origin")}/`,
             payment_method_types: ["card"],
             metadata,
-            customer: customerId
-        })
+            customer: customerId,
+        });
 
         if (!session.url) {
             return NextResponse.json(
                 { error: "Session not found" },
                 { status: 500 }
-            )
+            );
         }
-        
-        return NextResponse.json({ sessionId: session.id }, { status: 200 });
 
+        return NextResponse.json({ sessionId: session.id }, { status: 200 });
     } catch (error) {
         console.error("Error creating Stripe Checkout session:", error);
         return NextResponse.error();
