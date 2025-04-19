@@ -23,8 +23,7 @@ export default function Pagamentos() {
           className="bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-700 transition"
           onClick={() =>
             createPaymentStripeCheckout({
-              priceId: "price_12345",
-              customerEmail: "cliente@email.com",
+              testeId: "price_12345",
             })
           }
         >
@@ -35,8 +34,7 @@ export default function Pagamentos() {
           className="bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-700 transition"
           onClick={() =>
             createSubscriptionStripeCheckout({
-              priceId: "price_12345",
-              customerEmail: "cliente@email.com",
+              testeId: "price_12345",
             })
           }
         >
